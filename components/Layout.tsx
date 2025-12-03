@@ -7,6 +7,7 @@ export const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+  const isHome = location.pathname === '/';
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -16,19 +17,22 @@ export const Navigation = () => {
 
   useEffect(() => setIsOpen(false), [location]);
 
+  // If not home, always use the scrolled style (white bg, dark text)
+  const isSolid = !isHome || scrolled || isOpen;
+
   const navClass = `fixed w-full z-50 transition-all duration-500 ${
-    scrolled || isOpen ? 'bg-white/90 backdrop-blur-md shadow-sm py-3' : 'bg-transparent py-6'
+    isSolid ? 'bg-white/90 backdrop-blur-md shadow-sm py-3' : 'bg-transparent py-6'
   }`;
 
   const linkClass = (isActive: boolean) => `
     text-sm uppercase tracking-[0.15em] hover:text-champagne-600 transition-colors
-    ${isActive ? 'text-champagne-600 font-medium' : scrolled || isOpen ? 'text-gray-800' : 'text-white'}
+    ${isActive ? 'text-champagne-600 font-medium' : isSolid ? 'text-gray-800' : 'text-white'}
   `;
 
   return (
     <nav className={navClass}>
       <div className="container mx-auto px-6 flex justify-between items-center">
-        <NavLink to="/" className={`font-serif text-2xl font-bold tracking-tight z-50 ${scrolled || isOpen ? 'text-champagne-800' : 'text-white'}`}>
+        <NavLink to="/" className={`font-serif text-2xl font-bold tracking-tight z-50 ${isSolid ? 'text-champagne-800' : 'text-white'}`}>
           T & V
         </NavLink>
 
@@ -54,7 +58,7 @@ export const Navigation = () => {
         </div>
 
         {/* Mobile Toggle */}
-        <button onClick={() => setIsOpen(!isOpen)} className={`md:hidden z-50 ${scrolled || isOpen ? 'text-gray-800' : 'text-white'}`}>
+        <button onClick={() => setIsOpen(!isOpen)} className={`md:hidden z-50 ${isSolid ? 'text-gray-800' : 'text-white'}`}>
           {isOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
 

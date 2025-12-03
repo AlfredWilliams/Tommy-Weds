@@ -69,14 +69,15 @@ const Home = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2, ease: "easeOut" }}
           >
-            <p className="text-champagne-200 text-sm md:text-base uppercase tracking-[0.4em] mb-6 font-sans">
-              Save the Date
-            </p>
             <h1 className="text-6xl md:text-8xl lg:text-9xl font-serif text-white mb-6 drop-shadow-xl">
               Thomas <span className="text-champagne-300 italic">&</span> Vivian
             </h1>
             <p className="text-white/90 font-serif text-xl md:text-2xl italic tracking-wide mb-12">
               December 20th, 2025 • Villa Cetinale, Tuscany
+            </p>
+
+            <p className="text-champagne-200 text-sm md:text-base uppercase tracking-[0.4em] mb-6 font-sans">
+              Save the Date
             </p>
             
             <div className="mb-12">
