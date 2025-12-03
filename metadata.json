@@ -1,0 +1,7 @@
+{
+  "name": "Eternity | Thomas & Vivian",
+  "description": "A premium, luxurious wedding website featuring a digital love story, event details, gallery, and AI-assisted RSVP.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
