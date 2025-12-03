@@ -81,7 +81,7 @@ export const ParticleBackground = () => {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    let particles: { x: number; y: number; size: number; speedY: number; opacity: number }[] = [];
+    let particles: { x: number; y: number; size: number; speedY: number; opacity: number; sway: number; swayOffset: number }[] = [];
     let animationFrameId: number;
 
     const resize = () => {
@@ -90,17 +90,34 @@ export const ParticleBackground = () => {
     };
 
     const createParticles = () => {
-      const count = window.innerWidth < 768 ? 30 : 60;
+      const count = window.innerWidth < 768 ? 15 : 30; // Fewer particles for hearts as they are detailed
       particles = [];
       for (let i = 0; i < count; i++) {
         particles.push({
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
-          size: Math.random() * 2 + 0.5,
-          speedY: Math.random() * 0.5 + 0.1,
-          opacity: Math.random() * 0.5 + 0.1
+          size: Math.random() * 8 + 6, // Slightly larger for hearts
+          speedY: Math.random() * 0.4 + 0.1,
+          opacity: Math.random() * 0.4 + 0.1,
+          sway: Math.random() * 0.5 + 0.2, // Amplitude of sway
+          swayOffset: Math.random() * Math.PI * 2
         });
       }
+    };
+
+    const drawHeart = (ctx: CanvasRenderingContext2D, x: number, y: number, size: number, opacity: number) => {
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.beginPath();
+      // Draw heart path centered
+      const s = size / 2;
+      ctx.moveTo(0, -s * 0.5); 
+      ctx.bezierCurveTo(-s, -s * 1.5, -s * 2, s * 0.5, 0, s * 1.5);
+      ctx.bezierCurveTo(s * 2, s * 0.5, s, -s * 1.5, 0, -s * 0.5);
+      
+      ctx.fillStyle = `rgba(198, 159, 94, ${opacity})`; // Champagne Gold
+      ctx.fill();
+      ctx.restore();
     };
 
     const animate = () => {
@@ -108,15 +125,15 @@ export const ParticleBackground = () => {
       
       particles.forEach(p => {
         p.y -= p.speedY;
-        if (p.y < 0) {
-          p.y = canvas.height;
+        // Horizontal sway movement
+        p.x += Math.sin(p.y * 0.01 + p.swayOffset) * p.sway;
+
+        if (p.y < -20) {
+          p.y = canvas.height + 20;
           p.x = Math.random() * canvas.width;
         }
 
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(198, 159, 94, ${p.opacity})`; // Champagne Gold
-        ctx.fill();
+        drawHeart(ctx, p.x, p.y, p.size, p.opacity);
       });
 
       animationFrameId = requestAnimationFrame(animate);
