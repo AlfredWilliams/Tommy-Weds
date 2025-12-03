@@ -4,7 +4,7 @@ import { SectionTitle, GoldButton } from '../components/UI';
 import { Link } from 'react-router-dom';
 
 const Countdown = () => {
-  const targetDate = new Date('2025-12-20T16:00:00').getTime();
+  const targetDate = new Date('2025-12-20T11:00:00').getTime();
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
 
   useEffect(() => {
@@ -73,7 +73,7 @@ const Home = () => {
               Thomas <span className="text-champagne-300 italic">&</span> Vivian
             </h1>
             <p className="text-white/90 font-serif text-xl md:text-2xl italic tracking-wide mb-12">
-              December 20th, 2025 • Villa Cetinale, Tuscany
+              December 20th, 2025 • Accra, Ghana
             </p>
 
             <p className="text-champagne-200 text-sm md:text-base uppercase tracking-[0.4em] mb-6 font-sans">
@@ -102,18 +102,16 @@ const Home = () => {
           <p className="font-serif text-xl md:text-2xl text-champagne-800 leading-relaxed opacity-80 mb-10">
             "We met in school when life was simple and love was the last thing on our minds. But one moment changed everything — a shared laugh, a gentle glance, and suddenly the world felt softer. From study partners to soul partners, we’ve grown through seasons, storms, and dreams. Now, with hearts full of gratitude, we invite you to witness the beginning of our forever as we say ‘I do.’"
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
-            <div className="bg-white p-8 rounded shadow-sm border border-champagne-100">
-               <h3 className="font-serif text-2xl text-champagne-800 mb-2">The Ceremony</h3>
-               <p className="text-gray-600 font-sans text-sm">4:00 PM in the Gardens</p>
-            </div>
-            <div className="bg-white p-8 rounded shadow-sm border border-champagne-100">
-               <h3 className="font-serif text-2xl text-champagne-800 mb-2">The Reception</h3>
-               <p className="text-gray-600 font-sans text-sm">6:00 PM in the Ballroom</p>
-            </div>
-            <div className="bg-white p-8 rounded shadow-sm border border-champagne-100">
-               <h3 className="font-serif text-2xl text-champagne-800 mb-2">After Party</h3>
-               <p className="text-gray-600 font-sans text-sm">11:00 PM by the Pool</p>
+          <div className="mt-16 flex justify-center">
+            <div className="bg-white p-12 rounded shadow-sm border border-champagne-100 max-w-2xl w-full">
+               <h3 className="font-serif text-3xl text-champagne-800 mb-6">The Celebration</h3>
+               <div className="space-y-4 text-gray-600 font-sans">
+                 <p className="text-xl font-medium text-champagne-900 uppercase tracking-widest">Adjumako Entumbil</p>
+                 <p className="text-2xl font-serif text-champagne-700">Starting at 11:00 AM</p>
+                 <div className="w-24 h-[1px] bg-champagne-200 mx-auto my-6"></div>
+                 <p className="italic text-lg">Ceremony, Reception & After Party</p>
+                 <p className="text-sm opacity-70 mt-2">All events will be held at this beautiful location.</p>
+               </div>
             </div>
           </div>
         </div>
