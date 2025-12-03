@@ -126,7 +126,7 @@ export const AudioPlayer = () => {
       >
         {playing ? <Music2 size={20} className="animate-pulse" /> : <Music size={20} />}
       </button>
-      <audio ref={audioRef} loop src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Gymnopedie_No_1.ogg" />
+      <audio ref={audioRef} loop src="/assets/song.mp3" />
     </div>
   );
 };
