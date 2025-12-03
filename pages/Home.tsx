@@ -56,7 +56,7 @@ const Home = () => {
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img 
-            src="https://picsum.photos/seed/weddinghero1/1920/1080" 
+            src="/assets/images/thomas.png" 
             alt="Couple" 
             className="w-full h-full object-cover brightness-[0.6] scale-105 animate-[float_20s_ease-in-out_infinite_alternate]"
           />
