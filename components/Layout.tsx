@@ -95,7 +95,7 @@ export const Footer = () => (
   <footer className="bg-champagne-100 py-12 text-center border-t border-champagne-200">
     <div className="container mx-auto px-4">
       <h2 className="font-serif text-3xl text-champagne-800 mb-4">Thomas & Vivian</h2>
-      <p className="font-sans text-champagne-700 uppercase tracking-widest text-xs mb-8">December 20th, 2025 • Adjumako Entumbil</p>
+      <p className="font-sans text-champagne-700 uppercase tracking-widest text-xs mb-8">December 20th, 2025 • Accra, Ghana</p>
       <div className="flex justify-center space-x-4 mb-8">
         <Heart className="text-champagne-400 fill-current" size={20} />
       </div>

@@ -73,7 +73,7 @@ const Home = () => {
               Thomas <span className="text-champagne-300 italic">&</span> Vivian
             </h1>
             <p className="text-white/90 font-serif text-xl md:text-2xl italic tracking-wide mb-12">
-              December 20th, 2025 • Adjumako Entumbil
+              December 20th, 2025 • Accra, Ghana
             </p>
 
             <p className="text-champagne-200 text-sm md:text-base uppercase tracking-[0.4em] mb-6 font-sans">
@@ -113,6 +113,24 @@ const Home = () => {
                  <p className="text-sm opacity-70 mt-2">All events will be held at this beautiful location.</p>
                </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Share Your Memories Section */}
+      <section className="py-20 bg-white border-t border-champagne-100">
+        <div className="container mx-auto px-6 text-center">
+          <SectionTitle title="Share Your Memories" subtitle="Capture the Moment" />
+          <div className="flex flex-col items-center">
+            <div className="p-4 bg-white shadow-xl rounded-lg border-2 border-champagne-300 mb-8 max-w-xs transform hover:scale-105 transition-transform duration-500">
+              <img src="/assets/images/qrcode.png" alt="Upload QR Code" className="w-full h-auto" />
+            </div>
+            <p className="text-gray-600 font-serif text-lg mb-8 max-w-lg mx-auto leading-relaxed">
+              Help us capture every moment! Scan the code or click the button below to upload your photos and videos directly to our digital wedding album.
+            </p>
+            <Link to="/upload">
+              <GoldButton>Upload Photos Now</GoldButton>
+            </Link>
           </div>
         </div>
       </section>
