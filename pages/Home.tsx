@@ -73,7 +73,7 @@ const Home = () => {
               Thomas <span className="text-champagne-300 italic">&</span> Vivian
             </h1>
             <p className="text-white/90 font-serif text-xl md:text-2xl italic tracking-wide mb-12">
-              December 20th, 2025 • Accra, Ghana
+              December 20th, 2025 • Adjumako Entumbil
             </p>
 
             <p className="text-champagne-200 text-sm md:text-base uppercase tracking-[0.4em] mb-6 font-sans">
@@ -100,7 +100,7 @@ const Home = () => {
         <div className="container mx-auto px-6 max-w-4xl text-center">
           <SectionTitle title="A Love Story Begins" subtitle="Join Us" />
           <p className="font-serif text-xl md:text-2xl text-champagne-800 leading-relaxed opacity-80 mb-10">
-            "We met in school when life was simple and love was the last thing on our minds. But one moment changed everything a shared laugh, a gentle glance, and suddenly the world felt softer. From study partners to soul partners, we’ve grown through seasons, storms, and dreams. Now, with hearts full of gratitude, we invite you to witness the beginning of our forever as we say ‘I do.’"
+            "We met in school when life was simple and love was the last thing on our minds. But one moment changed everything a  shared laugh, a gentle glance, and suddenly the world felt softer. From study partners to soul partners, we’ve grown through seasons, storms, and dreams. Now, with hearts full of gratitude, we invite you to witness the beginning of our forever as we say ‘I do.’"
           </p>
           <div className="mt-16 flex justify-center">
             <div className="bg-white p-12 rounded shadow-sm border border-champagne-100 max-w-2xl w-full">
