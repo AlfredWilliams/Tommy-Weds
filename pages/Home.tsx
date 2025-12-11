@@ -138,7 +138,7 @@ const Home = () => {
             {/* Column 2 - Video (Center) */}
             <div className="relative overflow-hidden rounded-2xl shadow-xl border border-champagne-200 h-[600px] md:h-full transform md:-translate-y-4 md:shadow-2xl z-10 bg-black group">
               <video 
-                src="/assets/videos/tvideo.mp4" 
+                src="/assets/videos/output.mp4" 
                 autoPlay 
                 muted 
                 loop 
