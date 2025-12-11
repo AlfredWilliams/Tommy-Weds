@@ -1,4 +1,4 @@
-import React from 'react';
+import { type FC } from 'react';
 import { SectionTitle, GlassCard } from '../components/UI';
 import { MapPin, Clock, Info } from 'lucide-react';
 import { WeddingEvent } from '../types';

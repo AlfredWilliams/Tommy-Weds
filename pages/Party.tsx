@@ -1,4 +1,4 @@
-import React from 'react';
+import { type FC } from 'react';
 import { SectionTitle } from '../components/UI';
 import { PartyMember } from '../types';
 import { motion } from 'framer-motion';
@@ -12,7 +12,7 @@ const party: PartyMember[] = [
   { name: 'David Lee', role: 'Groomsman', bio: 'University friend and architect.', image: 'https://picsum.photos/seed/david/400/500', side: 'groom' },
 ];
 
-const PartyCard: React.FC<{ member: PartyMember }> = ({ member }) => (
+const PartyCard: FC<{ member: PartyMember }> = ({ member }) => (
   <motion.div 
     whileHover={{ y: -10 }}
     className="bg-white group overflow-hidden shadow-md hover:shadow-xl transition-all duration-300"

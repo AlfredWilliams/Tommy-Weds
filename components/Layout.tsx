@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { useState, useEffect, useRef } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Music, Music2, Heart } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export const Navigation = () => {
+  const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const location = useLocation();
   const isHome = location.pathname === '/';
 
   useEffect(() => {
@@ -24,6 +24,11 @@ export const Navigation = () => {
     isSolid ? 'bg-white/90 backdrop-blur-md shadow-sm py-3' : 'bg-transparent py-6'
   }`;
 
+  const isActivePath = (path: string) => {
+    if (path === '/') return location.pathname === '/';
+    return location.pathname === path;
+  };
+
   const linkClass = (isActive: boolean) => `
     text-sm uppercase tracking-[0.15em] hover:text-champagne-600 transition-colors
     ${isActive ? 'text-champagne-600 font-medium' : isSolid ? 'text-gray-800' : 'text-white'}
@@ -32,9 +37,9 @@ export const Navigation = () => {
   return (
     <nav className={navClass}>
       <div className="container mx-auto px-6 flex justify-between items-center">
-        <NavLink to="/" className={`font-serif text-2xl font-bold tracking-tight z-50 ${isSolid ? 'text-champagne-800' : 'text-white'}`}>
+        <Link to="/" className={`font-serif text-2xl font-bold tracking-tight z-50 ${isSolid ? 'text-champagne-800' : 'text-white'}`}>
           T & V
-        </NavLink>
+        </Link>
 
         {/* Desktop Menu */}
         <div className="hidden md:flex space-x-8 items-center">
@@ -46,15 +51,15 @@ export const Navigation = () => {
             ['Gallery', '/gallery'],
             ['RSVP', '/rsvp'],
           ].map(([label, path]) => (
-            <NavLink key={path} to={path} className={({ isActive }) => linkClass(isActive)}>
+            <Link key={path} to={path} className={linkClass(isActivePath(path))}>
               {label}
-            </NavLink>
+            </Link>
           ))}
-          <NavLink to="/rsvp">
+          <Link to="/rsvp">
             <button className="px-5 py-2 bg-champagne-500 text-white text-xs uppercase tracking-widest hover:bg-champagne-600 transition-colors">
               RSVP
             </button>
-          </NavLink>
+          </Link>
         </div>
 
         {/* Mobile Toggle */}
@@ -79,9 +84,9 @@ export const Navigation = () => {
                 ['Gallery', '/gallery'],
                 ['RSVP', '/rsvp'],
               ].map(([label, path]) => (
-                <NavLink key={path} to={path} className="font-serif text-2xl text-champagne-900">
+                <Link key={path} to={path} className="font-serif text-2xl text-champagne-900">
                   {label}
-                </NavLink>
+                </Link>
               ))}
             </motion.div>
           )}
@@ -95,7 +100,7 @@ export const Footer = () => (
   <footer className="bg-champagne-100 py-12 text-center border-t border-champagne-200">
     <div className="container mx-auto px-4">
       <h2 className="font-serif text-3xl text-champagne-800 mb-4">Thomas & Vivian</h2>
-      <p className="font-sans text-champagne-700 uppercase tracking-widest text-xs mb-8">December 20th, 2025 • Adjumako Entumbil.</p>
+      <p className="font-sans text-champagne-700 uppercase tracking-widest text-xs mb-8">December 20th, 2025 • Accra, Ghana</p>
       <div className="flex justify-center space-x-4 mb-8">
         <Heart className="text-champagne-400 fill-current" size={20} />
       </div>
@@ -108,7 +113,7 @@ export const Footer = () => (
 
 export const AudioPlayer = () => {
   const [playing, setPlaying] = useState(false);
-  const audioRef = React.useRef<HTMLAudioElement | null>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const toggle = () => {
     if (!audioRef.current) return;

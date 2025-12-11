@@ -1,9 +1,9 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef, type FC, type ReactNode } from 'react';
 import { motion } from 'framer-motion';
 
 // --- Typography ---
 
-export const SectionTitle: React.FC<{ title: string; subtitle?: string; light?: boolean }> = ({ title, subtitle, light = false }) => (
+export const SectionTitle: FC<{ title: string; subtitle?: string; light?: boolean }> = ({ title, subtitle, light = false }) => (
   <div className="text-center mb-16 relative z-10">
     {subtitle && (
       <motion.p
@@ -30,7 +30,7 @@ export const SectionTitle: React.FC<{ title: string; subtitle?: string; light?: 
 
 // --- Buttons ---
 
-export const GoldButton: React.FC<{ children: React.ReactNode; onClick?: () => void; className?: string; disabled?: boolean }> = ({ children, onClick, className = '', disabled = false }) => (
+export const GoldButton: FC<{ children: ReactNode; onClick?: () => void; className?: string; disabled?: boolean }> = ({ children, onClick, className = '', disabled = false }) => (
   <motion.button
     whileHover={{ scale: 1.02 }}
     whileTap={{ scale: 0.98 }}
@@ -49,7 +49,7 @@ export const GoldButton: React.FC<{ children: React.ReactNode; onClick?: () => v
   </motion.button>
 );
 
-export const OutlineButton: React.FC<{ children: React.ReactNode; onClick?: () => void; className?: string }> = ({ children, onClick, className = '' }) => (
+export const OutlineButton: FC<{ children: ReactNode; onClick?: () => void; className?: string }> = ({ children, onClick, className = '' }) => (
   <button
     onClick={onClick}
     className={`
@@ -64,7 +64,7 @@ export const OutlineButton: React.FC<{ children: React.ReactNode; onClick?: () =
 
 // --- Cards ---
 
-export const GlassCard: React.FC<{ children: React.ReactNode; className?: string }> = ({ children, className = '' }) => (
+export const GlassCard: FC<{ children: ReactNode; className?: string }> = ({ children, className = '' }) => (
   <div className={`glass-panel p-8 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-500 ${className}`}>
     {children}
   </div>

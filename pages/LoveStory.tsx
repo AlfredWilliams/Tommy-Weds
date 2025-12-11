@@ -1,4 +1,4 @@
-import React from 'react';
+import { type FC } from 'react';
 import { motion } from 'framer-motion';
 import { SectionTitle, GlassCard } from '../components/UI';
 import { TimelineEvent } from '../types';

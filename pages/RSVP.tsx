@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { SectionTitle, GoldButton, GlassCard } from '../components/UI';
 import { RSVPStatus } from '../types';
 import { Sparkles, Wand2 } from 'lucide-react';

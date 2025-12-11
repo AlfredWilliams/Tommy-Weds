@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { SectionTitle, GoldButton } from '../components/UI';
-import { Link } from 'react-router-dom';
 
 const Countdown = () => {
   const targetDate = new Date('2025-12-20T11:00:00').getTime();
@@ -73,7 +72,7 @@ const Home = () => {
               Thomas <span className="text-champagne-300 italic">&</span> Vivian
             </h1>
             <p className="text-white/90 font-serif text-xl md:text-2xl italic tracking-wide mb-12">
-              December 20th, 2025 • Adjumako Entumbil.
+              December 20th, 2025 • Accra, Ghana
             </p>
 
             <p className="text-champagne-200 text-sm md:text-base uppercase tracking-[0.4em] mb-6 font-sans">
@@ -84,9 +83,9 @@ const Home = () => {
                <Countdown />
             </div>
 
-            <Link to="/events">
+            <a href="#/events">
               <GoldButton className="min-w-[200px]">Explore the Wedding</GoldButton>
-            </Link>
+            </a>
           </motion.div>
         </div>
         
@@ -117,8 +116,67 @@ const Home = () => {
         </div>
       </section>
 
+      {/* Mini Gallery Section */}
+      <section className="py-24 bg-white relative overflow-hidden">
+        <div className="container mx-auto px-6">
+          <SectionTitle title="Captured Moments" subtitle="A Glimpse" />
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 h-auto md:h-[700px]">
+            
+            {/* Column 1 - Images */}
+            <div className="flex flex-col gap-6 h-[500px] md:h-full">
+              <div className="relative overflow-hidden rounded-lg shadow-md flex-1 group cursor-pointer">
+                 <img src="/assets/images/t1.jpg" alt="Thomas & Vivian" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500" />
+              </div>
+              <div className="relative overflow-hidden rounded-lg shadow-md flex-1 group cursor-pointer">
+                 <img src="/assets/images/t7.jpg" alt="Thomas & Vivian" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500" />
+              </div>
+            </div>
+
+            {/* Column 2 - Video (Center) */}
+            <div className="relative overflow-hidden rounded-2xl shadow-xl border border-champagne-200 h-[600px] md:h-full transform md:-translate-y-4 md:shadow-2xl z-10 bg-black group">
+              <video 
+                src="/assets/videos/tvideo.mp4" 
+                autoPlay 
+                muted 
+                loop 
+                playsInline
+                className="w-full h-full object-cover opacity-95 group-hover:opacity-100 transition-opacity duration-500" 
+              />
+              <div className="absolute bottom-6 left-0 w-full text-center">
+                <p className="text-white/90 font-serif text-lg italic tracking-widest drop-shadow-md">Love in Motion</p>
+              </div>
+            </div>
+
+            {/* Column 3 - Images */}
+            <div className="flex flex-col gap-6 h-[500px] md:h-full">
+              <div className="relative overflow-hidden rounded-lg shadow-md flex-1 group cursor-pointer">
+                 <img src="/assets/images/t11.jpg" alt="Thomas & Vivian" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500" />
+              </div>
+              <div className="relative overflow-hidden rounded-lg shadow-md flex-1 group cursor-pointer">
+                 <img src="/assets/images/t8.jpg" alt="Thomas & Vivian" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500" />
+              </div>
+            </div>
+
+          </div>
+
+          <div className="text-center mt-16">
+            <a href="#/gallery">
+              <button className="text-champagne-600 uppercase tracking-widest text-xs border-b border-champagne-300 pb-2 hover:text-champagne-800 hover:border-champagne-600 transition-all">
+                  View Full Gallery
+              </button>
+            </a>
+          </div>
+
+        </div>
+      </section>
+
       {/* Share Your Memories Section */}
-      <section className="py-20 bg-white border-t border-champagne-100">
+      <section className="py-20 bg-champagne-50 border-t border-champagne-100">
         <div className="container mx-auto px-6 text-center">
           <SectionTitle title="Share Your Memories" subtitle="Capture the Moment" />
           <div className="flex flex-col items-center">
@@ -128,9 +186,9 @@ const Home = () => {
             <p className="text-gray-600 font-serif text-lg mb-8 max-w-lg mx-auto leading-relaxed">
               Help us capture every moment! Scan the code or click the button below to upload your photos and videos directly to our digital wedding album.
             </p>
-            <Link to="/upload">
+            <a href="#/upload">
               <GoldButton>Upload Photos Now</GoldButton>
-            </Link>
+            </a>
           </div>
         </div>
       </section>

@@ -1,13 +1,18 @@
-import React, { useContext, useState, useRef } from 'react';
+import { useEffect, useContext, useState, useRef, ChangeEvent } from 'react';
 import { SectionTitle, GoldButton, GlassCard } from '../components/UI';
 import { Camera, Check, Upload, Trash2, Smartphone, QrCode } from 'lucide-react';
-import { AppContext } from '../App';
+import { AppContext } from '../context/AppContext';
 import { Photo } from '../types';
 import { motion, AnimatePresence } from 'framer-motion';
 
 // --- Gallery View ---
 const GalleryGrid = () => {
-  const { photos } = useContext(AppContext);
+  const context = useContext(AppContext);
+
+  // Safely handle null context
+  if (!context) return null;
+  const { photos } = context;
+  
   const approvedPhotos = photos.filter(p => p.approved);
 
   return (
@@ -24,7 +29,6 @@ const GalleryGrid = () => {
           <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
             {approvedPhotos.map((photo) => (
               <motion.div 
-                layout
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 key={photo.id} 
@@ -48,12 +52,16 @@ const GalleryGrid = () => {
 
 // --- QR Upload View ---
 export const QRUpload = () => {
-  const { addPhoto } = useContext(AppContext);
+  const context = useContext(AppContext);
+  // Add safety check
+  if (!context) return null;
+  const { addPhoto } = context;
+
   const [uploading, setUploading] = useState(false);
   const [success, setSuccess] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       setUploading(true);
       const file = e.target.files[0];
