@@ -5,29 +5,20 @@ import { WeddingEvent } from '../types';
 
 const eventsList: WeddingEvent[] = [
   {
-    title: 'The Ceremony',
-    time: '4:00 PM',
-    location: 'Villa Cetinale Gardens',
-    address: 'Strada Comunale di Cetinale, 9, 53018 Sovicille SI, Italy',
-    description: 'Join us in the Italian gardens for an outdoor ceremony. Please arrive by 3:30 PM.',
+    title: 'The Wedding Ceremony',
+    time: '11:00 AM',
+    location: 'Adjumako Entumbil',
+    address: 'Adjumako Entumbil, Ghana',
+    description: 'Join us as we exchange vows and celebrate our union. Please arrive promptly to be seated.',
     icon: 'ceremony',
-    mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2903.953885465943!2d11.215571315486836!3d43.29415697913506!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x132a3bf60416955d%3A0x6b6771457883505!2sVilla%20Cetinale!5e0!3m2!1sen!2sus!4v1645564859384!5m2!1sen!2sus'
+    mapUrl: 'https://maps.google.com/maps?q=Adjumako+Entumbil&t=&z=13&ie=UTF8&iwloc=&output=embed'
   },
   {
-    title: 'Cocktail Hour',
-    time: '5:30 PM',
-    location: 'The Lemon Grove',
-    address: 'Villa Cetinale, Upper Terrace',
-    description: 'Drinks and hors d\'oeuvres will be served while the sun sets over the Tuscan hills.',
-    icon: 'reception',
-    mapUrl: ''
-  },
-  {
-    title: 'Reception Dinner',
-    time: '7:00 PM',
-    location: 'Main Ballroom',
-    address: 'Villa Cetinale',
-    description: 'A three-course Italian dinner followed by speeches and dancing into the night.',
+    title: 'Reception & Celebration',
+    time: 'Immediately Following',
+    location: 'Adjumako Entumbil',
+    address: 'Adjumako Entumbil, Ghana',
+    description: 'The celebration continues at the same beautiful location with dining, music, and dancing.',
     icon: 'party',
     mapUrl: ''
   }
@@ -66,7 +57,7 @@ const Events = () => {
                   <Info size={20} className="mr-2" /> Dress Code
                 </h4>
                 <p className="text-gray-600">
-                  <span className="font-semibold text-champagne-900">Black Tie Optional.</span> Gentlemen are requested to wear a tuxedo or dark suit. Ladies are encouraged to wear floor-length gowns or formal cocktail dresses.
+                  <span className="font-semibold text-champagne-900">Style Guide.</span> You can wear anything of your choice but look gentle and neat.
                 </p>
              </div>
            </div>

@@ -7,7 +7,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Home from './pages/Home';
 import LoveStory from './pages/LoveStory';
 import Events from './pages/Events';
-import Party from './pages/Party';
 import Gallery, { QRUpload } from './pages/Gallery';
 import RSVP from './pages/RSVP';
 
@@ -94,7 +93,6 @@ const App = () => {
                       <Route path="/" element={<Home />} />
                       <Route path="/story" element={<LoveStory />} />
                       <Route path="/events" element={<Events />} />
-                      <Route path="/party" element={<Party />} />
                       <Route path="/gallery" element={<Gallery />} />
                       <Route path="/rsvp" element={<RSVP />} />
                     </Routes>

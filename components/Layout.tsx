@@ -47,7 +47,6 @@ export const Navigation = () => {
             ['Home', '/'],
             ['Story', '/story'],
             ['Events', '/events'],
-            ['Party', '/party'],
             ['Gallery', '/gallery'],
             ['RSVP', '/rsvp'],
           ].map(([label, path]) => (
@@ -80,7 +79,6 @@ export const Navigation = () => {
                 ['Home', '/'],
                 ['Our Story', '/story'],
                 ['The Wedding', '/events'],
-                ['Wedding Party', '/party'],
                 ['Gallery', '/gallery'],
                 ['RSVP', '/rsvp'],
               ].map(([label, path]) => (
@@ -137,4 +135,3 @@ export const AudioPlayer = () => {
     </div>
   );
 };
-
