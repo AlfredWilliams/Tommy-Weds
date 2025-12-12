@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { SectionTitle, GoldButton } from '../components/UI';
 
 const Countdown = () => {
@@ -49,28 +49,57 @@ const Countdown = () => {
 };
 
 const Home = () => {
+  const heroImages = [
+    '/assets/images/thomas.png',
+    '/assets/images/1.png',
+    '/assets/images/2.png'
+  ];
+
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % heroImages.length);
+    }, 9000);
+    return () => clearInterval(interval);
+  }, [heroImages.length]);
+
   return (
     <div className="w-full">
       {/* Hero Section */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
-          <img 
-            src="/assets/images/thomas.png" 
-            alt="Couple" 
-            className="w-full h-full object-cover brightness-[0.6] scale-105 animate-[float_20s_ease-in-out_infinite_alternate]"
-          />
+          <AnimatePresence mode="popLayout">
+            <motion.img 
+              key={currentImageIndex}
+              src={heroImages[currentImageIndex]} 
+              alt="Couple" 
+              initial={{ scale: 1.15, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 2.5, ease: "easeOut" }}
+              className="absolute inset-0 w-full h-full object-cover brightness-[0.6]"
+            />
+          </AnimatePresence>
           <div className="absolute inset-0 bg-black/20" />
         </div>
 
         <div className="relative z-10 text-center px-4">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.2, ease: "easeOut" }}
+            transition={{ duration: 1.2, delay: 0.8, ease: "easeOut" }}
           >
             <h1 className="text-6xl md:text-8xl lg:text-9xl font-serif text-white mb-6 drop-shadow-xl">
               Thomas <span className="text-champagne-300 italic">&</span> Vivian
             </h1>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.2, delay: 1.5, ease: "easeOut" }}
+          >
             <p className="text-white/90 font-serif text-xl md:text-2xl italic tracking-wide mb-12">
               December 20th, 2025 • Adjumako Entumbil.
             </p>
@@ -89,8 +118,24 @@ const Home = () => {
           </motion.div>
         </div>
         
-        <div className="absolute bottom-10 w-full flex justify-center animate-bounce opacity-50">
+        <motion.div 
+           initial={{ opacity: 0 }}
+           animate={{ opacity: 0.5 }}
+           transition={{ delay: 3, duration: 1 }}
+           className="absolute bottom-10 w-full flex justify-center animate-bounce"
+        >
            <div className="w-[1px] h-16 bg-white/50"></div>
+        </motion.div>
+
+        {/* Progressive Loading Bar */}
+        <div className="absolute bottom-0 left-0 w-full h-1.5 bg-white/20 z-20">
+          <motion.div 
+            key={currentImageIndex}
+            initial={{ width: "0%" }}
+            animate={{ width: "100%" }}
+            transition={{ duration: 9, ease: "linear" }}
+            className="h-full bg-champagne-400"
+          />
         </div>
       </section>
 

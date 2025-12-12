@@ -1,6 +1,6 @@
 import { useEffect, useContext, useState, useRef, ChangeEvent } from 'react';
 import { SectionTitle, GoldButton, GlassCard } from '../components/UI';
-import { Camera, Check, Upload, Trash2, Smartphone, QrCode } from 'lucide-react';
+import { Camera, Check, Upload, Trash2, Smartphone, QrCode, X } from 'lucide-react';
 import { AppContext } from '../context/AppContext';
 import { Photo } from '../types';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -8,6 +8,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 // --- Gallery View ---
 const GalleryGrid = () => {
   const context = useContext(AppContext);
+  const [selectedPhoto, setSelectedPhoto] = useState<Photo | null>(null);
 
   // Safely handle null context
   if (!context) return null;
@@ -20,27 +21,81 @@ const GalleryGrid = () => {
       <div className="container mx-auto px-4">
         <SectionTitle title="Captured Moments" subtitle="Gallery" />
         
+        {/* Lightbox Modal */}
+        <AnimatePresence>
+          {selectedPhoto && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-md flex items-center justify-center p-4 cursor-zoom-out"
+              onClick={() => setSelectedPhoto(null)}
+            >
+              <button 
+                className="absolute top-6 right-6 text-white/70 hover:text-white transition-colors p-2 z-50 bg-white/10 rounded-full"
+                onClick={(e) => { e.stopPropagation(); setSelectedPhoto(null); }}
+              >
+                <X size={24} />
+              </button>
+
+              <motion.img
+                initial={{ scale: 0.95, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                src={selectedPhoto.url}
+                alt="Memory"
+                className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl"
+                onClick={(e) => e.stopPropagation()}
+              />
+              
+              <motion.div 
+                 initial={{ y: 20, opacity: 0 }}
+                 animate={{ y: 0, opacity: 1 }}
+                 transition={{ delay: 0.2 }}
+                 className="absolute bottom-6 left-0 w-full text-center px-4 pointer-events-none"
+              >
+                 {selectedPhoto.caption && (
+                    <p className="text-white/90 font-serif text-2xl italic drop-shadow-lg mb-2">{selectedPhoto.caption}</p>
+                 )}
+                 <p className="text-white/60 text-xs uppercase tracking-widest">
+                    {selectedPhoto.uploadedBy ? `Captured by ${selectedPhoto.uploadedBy}` : 'Wedding Moment'}
+                 </p>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
         {approvedPhotos.length === 0 ? (
           <div className="text-center py-20 opacity-60">
             <Camera size={48} className="mx-auto mb-4 text-champagne-400" />
             <p className="font-serif text-xl">No photos yet. Be the first to upload!</p>
           </div>
         ) : (
-          <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {approvedPhotos.map((photo) => (
               <motion.div 
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
                 key={photo.id} 
-                className="break-inside-avoid relative group rounded-lg overflow-hidden shadow-md"
+                onClick={() => setSelectedPhoto(photo)}
+                className="group relative h-[500px] rounded-lg overflow-hidden shadow-md cursor-pointer bg-champagne-100"
               >
-                <img src={photo.url} alt="Wedding moment" className="w-full h-auto hover:scale-105 transition-transform duration-500" />
-                {photo.caption && (
-                  <div className="absolute bottom-0 left-0 w-full bg-black/60 p-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <p className="text-white text-sm font-serif italic">{photo.caption}</p>
-                    <p className="text-xs text-white/70 mt-1">By {photo.uploadedBy || 'Guest'}</p>
-                  </div>
-                )}
+                <img 
+                   src={photo.url} 
+                   alt="Wedding moment" 
+                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+                />
+                
+                {/* Gradient Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-8">
+                   <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                     {photo.caption && <p className="text-white text-lg font-serif italic mb-2">{photo.caption}</p>}
+                     <p className="text-white/80 text-xs uppercase tracking-widest flex items-center gap-2">
+                       <Camera size={12} />
+                       {photo.uploadedBy || 'View Photo'}
+                     </p>
+                   </div>
+                </div>
               </motion.div>
             ))}
           </div>
