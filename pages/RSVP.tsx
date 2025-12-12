@@ -36,7 +36,7 @@ const RSVP = () => {
             <>
               <div className="text-center mb-10">
                 <SectionTitle title="RSVP" subtitle="Kindly Reply" />
-                <p className="text-gray-600 -mt-8 mb-6">Please respond by August 1st, 2024</p>
+                <p className="text-gray-600 -mt-8 mb-6">Please respond by December 20th, 2025</p>
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-6">
