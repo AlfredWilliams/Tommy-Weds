@@ -1,6 +1,6 @@
 import { useState, type FC } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { SectionTitle, GlassCard } from '../components/UI';
+import { SectionTitle, GlassCard, RevealImage } from '../components/UI';
 import { TimelineEvent } from '../types';
 import { X } from 'lucide-react';
 
@@ -97,18 +97,16 @@ const LoveStory = () => {
               {/* Image */}
               <div className="w-full md:w-1/2 px-6">
                 <div 
-                  className="relative overflow-hidden rounded-lg shadow-xl luxury-border group cursor-pointer"
+                  className="relative overflow-hidden rounded-lg shadow-xl luxury-border group cursor-pointer h-96"
                   onClick={() => setSelectedImage(event.image)}
                 >
-                  <motion.img 
-                    whileHover={{ scale: 1.03 }}
-                    transition={{ duration: 0.5 }}
+                  <RevealImage 
                     src={event.image} 
                     alt={event.title} 
-                    className="w-full h-96 object-cover" // Increased height
+                    className="w-full h-full"
                   />
                   {/* Hover Overlay */}
-                  <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                  <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none">
                     <span className="text-white border border-white/50 px-4 py-2 rounded-sm uppercase tracking-widest text-xs backdrop-blur-sm">View Full Size</span>
                   </div>
                 </div>
@@ -126,4 +124,3 @@ const LoveStory = () => {
 };
 
 export default LoveStory;
-// --- UI COMPONENTS (components/UI.tsx) ---

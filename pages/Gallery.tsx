@@ -1,12 +1,12 @@
-import { useEffect, useContext, useState, useRef, ChangeEvent } from 'react';
-import { SectionTitle, GoldButton, GlassCard } from '../components/UI';
-import { Camera, Check, Upload, Trash2, Smartphone, QrCode, X } from 'lucide-react';
+import { useContext, useState, useRef, ChangeEvent } from 'react';
+import { SectionTitle, GoldButton, RevealImage } from '../components/UI';
+import { Camera, Check, Upload, X, Image as ImageIcon } from 'lucide-react';
 import { AppContext } from '../context/AppContext';
 import { Photo } from '../types';
 import { motion, AnimatePresence } from 'framer-motion';
 
 // --- Gallery View ---
-const GalleryGrid = () => {
+const Gallery = () => {
   const context = useContext(AppContext);
   const [selectedPhoto, setSelectedPhoto] = useState<Photo | null>(null);
 
@@ -78,16 +78,16 @@ const GalleryGrid = () => {
                 viewport={{ once: true }}
                 key={photo.id} 
                 onClick={() => setSelectedPhoto(photo)}
-                className="group relative h-[500px] rounded-lg overflow-hidden shadow-md cursor-pointer bg-champagne-100"
+                className="group relative h-[500px] rounded-lg overflow-hidden shadow-md cursor-pointer"
               >
-                <img 
+                <RevealImage 
                    src={photo.url} 
                    alt="Wedding moment" 
-                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+                   className="w-full h-full"
                 />
                 
                 {/* Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-8">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-8 z-20 pointer-events-none">
                    <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
                      {photo.caption && <p className="text-white text-lg font-serif italic mb-2">{photo.caption}</p>}
                      <p className="text-white/80 text-xs uppercase tracking-widest flex items-center gap-2">
@@ -115,6 +115,7 @@ export const QRUpload = () => {
   const [uploading, setUploading] = useState(false);
   const [success, setSuccess] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const googlePhotosLink = "https://photos.app.goo.gl/RS3VKSqvfNhxD8Xi7";
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -133,7 +134,6 @@ export const QRUpload = () => {
             });
             setUploading(false);
             setSuccess(true);
-            setTimeout(() => setSuccess(false), 3000);
           }
         }, 1500); // Simulate upload delay
       };
@@ -150,54 +150,64 @@ export const QRUpload = () => {
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.8, opacity: 0 }}
-            className="fixed inset-0 bg-white z-50 flex flex-col items-center justify-center"
+            className="fixed inset-0 bg-white z-50 flex flex-col items-center justify-center p-6"
           >
              <div className="w-24 h-24 rounded-full bg-green-100 flex items-center justify-center mb-6">
                <Check size={48} className="text-green-600" />
              </div>
              <h2 className="font-serif text-3xl text-champagne-900 mb-2">Thank You!</h2>
-             <p className="text-gray-600">Your photo has been shared.</p>
+             <p className="text-gray-600 mb-8">Your photo has been shared to the live feed.</p>
+
+             <div className="w-full max-w-sm bg-stone-50 border border-champagne-200 rounded-xl p-6 mb-8">
+                <p className="text-sm text-gray-600 mb-4">Please also save it to our permanent album:</p>
+                <a 
+                  href={googlePhotosLink}
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center w-full bg-[#4285F4] text-white py-3 px-4 rounded-lg shadow hover:bg-[#3367D6] transition-colors font-medium"
+                >
+                  <ImageIcon size={20} className="mr-2" />
+                  Upload to Google Photos
+                </a>
+             </div>
+
+             <button onClick={() => setSuccess(false)} className="text-champagne-600 underline text-sm hover:text-champagne-800">
+               Upload another to Live Feed
+             </button>
           </motion.div>
         ) : (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="max-w-md w-full">
-            <div className="mb-8 flex justify-center">
-              <div className="w-20 h-20 bg-champagne-200 rounded-full flex items-center justify-center animate-pulse">
-                <Smartphone size={40} className="text-champagne-800" />
-              </div>
-            </div>
-            <h1 className="font-serif text-4xl text-champagne-900 mb-4">Share the Love</h1>
-            <p className="text-gray-600 mb-8 leading-relaxed">
-              Take a photo or upload one from your gallery to instantly add it to the live wedding album.
-            </p>
+            <div className="bg-white p-8 rounded-xl shadow-lg border-2 border-champagne-200">
+               <div className="w-20 h-20 bg-champagne-100 rounded-full flex items-center justify-center mx-auto mb-6 text-champagne-600">
+                 <Upload size={32} />
+               </div>
+               
+               <h2 className="font-serif text-2xl text-champagne-900 mb-2">Share Your Memories</h2>
+               <p className="text-gray-600 mb-8">Select a photo from your gallery or take a new one to share instantly.</p>
 
-            <div 
-              onClick={() => fileInputRef.current?.click()}
-              className="bg-white border-2 border-dashed border-champagne-300 rounded-xl p-10 cursor-pointer hover:bg-champagne-50 transition-colors shadow-sm"
-            >
-              <input 
-                type="file" 
-                accept="image/*" 
-                ref={fileInputRef} 
-                className="hidden" 
-                onChange={handleFileChange}
-              />
-              {uploading ? (
-                <div className="flex flex-col items-center">
-                   <div className="w-10 h-10 border-4 border-champagne-400 border-t-transparent rounded-full animate-spin mb-4"></div>
-                   <p className="text-champagne-800 font-medium">Uploading...</p>
-                </div>
-              ) : (
-                <div className="flex flex-col items-center">
-                   <Upload size={48} className="text-champagne-400 mb-4" />
-                   <span className="font-serif text-xl text-champagne-800">Tap to Upload</span>
-                   <span className="text-xs uppercase tracking-widest text-gray-400 mt-2">High Quality Photos Only</span>
-                </div>
-              )}
-            </div>
-
-            <div className="mt-12 opacity-60">
-              <img src="https://picsum.photos/seed/flower/100/100" className="w-16 h-16 rounded-full mx-auto mb-4 object-cover grayscale" alt="decoration" />
-              <p className="font-serif text-sm">Thomas & Vivian</p>
+               <div className="relative">
+                 <input 
+                   ref={fileInputRef}
+                   type="file" 
+                   accept="image/*" 
+                   onChange={handleFileChange}
+                   className="hidden"
+                 />
+                 <GoldButton onClick={() => fileInputRef.current?.click()} className="w-full flex items-center justify-center gap-2" disabled={uploading}>
+                   {uploading ? (
+                     <span>Uploading...</span>
+                   ) : (
+                     <>
+                       <Camera size={18} />
+                       <span>Select Photo</span>
+                     </>
+                   )}
+                 </GoldButton>
+               </div>
+               
+               <p className="mt-6 text-xs text-gray-400">
+                 By uploading, you agree to share this photo with the couple and guests.
+               </p>
             </div>
           </motion.div>
         )}
@@ -206,4 +216,4 @@ export const QRUpload = () => {
   );
 };
 
-export default GalleryGrid;
+export default Gallery;

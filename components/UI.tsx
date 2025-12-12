@@ -1,4 +1,4 @@
-import { useEffect, useRef, type FC, type ReactNode } from 'react';
+import { useEffect, useRef, useState, type FC, type ReactNode } from 'react';
 import { motion } from 'framer-motion';
 
 // --- Typography ---
@@ -27,6 +27,76 @@ export const SectionTitle: FC<{ title: string; subtitle?: string; light?: boolea
     <div className="w-24 h-1 bg-gradient-to-r from-transparent via-champagne-400 to-transparent mx-auto mt-6 opacity-60"></div>
   </div>
 );
+
+// --- Images ---
+
+export const RevealImage: FC<{ src: string; alt: string; className?: string; onClick?: () => void }> = ({ src, alt, className = '', onClick }) => {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  return (
+    <div className={`relative overflow-hidden bg-champagne-100 ${className}`} onClick={onClick}>
+      {/* Loading Pulse Skeleton */}
+      {!isLoaded && (
+        <div className="absolute inset-0 z-0 bg-champagne-200 animate-pulse" />
+      )}
+      
+      <motion.img
+        src={src}
+        alt={alt}
+        initial={{ opacity: 0, scale: 1.05 }}
+        animate={{ 
+          opacity: isLoaded ? 1 : 0,
+          scale: isLoaded ? 1 : 1.05 
+        }}
+        transition={{ duration: 0.7, ease: "easeOut" }}
+        onLoad={() => setIsLoaded(true)}
+        className={`w-full h-full object-cover transition-transform duration-700 hover:scale-110 relative z-10`}
+      />
+    </div>
+  );
+};
+
+// --- Effects ---
+
+export const Confetti = () => {
+  // Generate random particles
+  const particles = Array.from({ length: 50 }).map((_, i) => ({
+    id: i,
+    x: Math.random() * 100, // vw
+    y: -10 - Math.random() * 20, // start above screen
+    size: Math.random() * 8 + 4,
+    color: ['#dbc18b', '#c69f5e', '#fce7e7', '#ffffff'][Math.floor(Math.random() * 4)],
+    rotation: Math.random() * 360,
+    delay: Math.random() * 0.5
+  }));
+
+  return (
+    <div className="fixed inset-0 pointer-events-none z-[60] overflow-hidden">
+      {particles.map((p) => (
+        <motion.div
+          key={p.id}
+          initial={{ top: `${p.y}%`, left: `${p.x}%`, rotate: p.rotation, opacity: 1 }}
+          animate={{ 
+            top: '110%', 
+            rotate: p.rotation + 360 + Math.random() * 180,
+            opacity: 0
+          }}
+          transition={{ 
+            duration: Math.random() * 2 + 2, 
+            delay: p.delay, 
+            ease: "easeOut" 
+          }}
+          style={{
+            position: 'absolute',
+            width: p.size,
+            height: p.size * 0.6, // confetti shape
+            backgroundColor: p.color,
+          }}
+        />
+      ))}
+    </div>
+  );
+};
 
 // --- Buttons ---
 

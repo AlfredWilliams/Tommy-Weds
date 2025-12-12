@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { SectionTitle, GoldButton } from '../components/UI';
+import { SectionTitle, GoldButton, RevealImage } from '../components/UI';
 
 const Countdown = () => {
   const targetDate = new Date('2025-12-20T11:00:00').getTime();
@@ -171,12 +171,12 @@ const Home = () => {
             {/* Column 1 - Images */}
             <div className="flex flex-col gap-6 h-[500px] md:h-full">
               <div className="relative overflow-hidden rounded-lg shadow-md flex-1 group cursor-pointer">
-                 <img src="/assets/images/t1.jpg" alt="Thomas & Vivian" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500" />
+                 <RevealImage src="/assets/images/t1.jpg" alt="Thomas & Vivian" className="w-full h-full" />
+                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500 pointer-events-none" />
               </div>
               <div className="relative overflow-hidden rounded-lg shadow-md flex-1 group cursor-pointer">
-                 <img src="/assets/images/t7.jpg" alt="Thomas & Vivian" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500" />
+                 <RevealImage src="/assets/images/t7.jpg" alt="Thomas & Vivian" className="w-full h-full" />
+                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500 pointer-events-none" />
               </div>
             </div>
 
@@ -198,12 +198,12 @@ const Home = () => {
             {/* Column 3 - Images */}
             <div className="flex flex-col gap-6 h-[500px] md:h-full">
               <div className="relative overflow-hidden rounded-lg shadow-md flex-1 group cursor-pointer">
-                 <img src="/assets/images/t11.jpg" alt="Thomas & Vivian" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500" />
+                 <RevealImage src="/assets/images/t11.jpg" alt="Thomas & Vivian" className="w-full h-full" />
+                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500 pointer-events-none" />
               </div>
               <div className="relative overflow-hidden rounded-lg shadow-md flex-1 group cursor-pointer">
-                 <img src="/assets/images/t8.jpg" alt="Thomas & Vivian" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500" />
+                 <RevealImage src="/assets/images/t8.jpg" alt="Thomas & Vivian" className="w-full h-full" />
+                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500 pointer-events-none" />
               </div>
             </div>
 

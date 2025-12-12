@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { SectionTitle, GoldButton, GlassCard } from '../components/UI';
+import { SectionTitle, GoldButton, GlassCard, Confetti } from '../components/UI';
 import { RSVPStatus } from '../types';
 import { Sparkles, Wand2 } from 'lucide-react';
 import { generateWeddingWish } from '../services/geminiService';
@@ -126,7 +126,8 @@ const RSVP = () => {
               </form>
             </>
           ) : (
-            <div className="text-center py-10">
+            <div className="text-center py-10 relative">
+              <Confetti />
               <div className="mb-6 inline-block p-4 rounded-full bg-green-50 text-green-600">
                 <Sparkles size={40} />
               </div>
